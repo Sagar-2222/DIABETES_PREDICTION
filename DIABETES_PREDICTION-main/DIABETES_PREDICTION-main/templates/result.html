@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result | Diabetes Prediction System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="result-page">
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>DiabetesAI</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Result Content -->
+    <main class="result-content">
+        <div class="result-container">
+            <!-- Result Card -->
+            <div class="result-card">
+                <div class="result-icon-wrapper">
+                    {% if "Not Diabetic" in prediction or "not" in prediction.lower() %}
+                        <div class="result-icon success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    {% elif "Error" in prediction %}
+                        <div class="result-icon error">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                    {% else %}
+                        <div class="result-icon warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <h1 class="result-title">Prediction Result</h1>
+                
+                <div class="result-display">
+                    {% if "Not Diabetic" in prediction %}
+                        <div class="result-status success">
+                            <h2>Low Risk</h2>
+                            <p class="result-text">{{ prediction }}</p>
+                        </div>
+                        <div class="result-message">
+                            <p>Based on the provided health parameters, the AI model indicates a low probability of diabetes.</p>
+                            <div class="result-recommendations">
+                                <h3><i class="fas fa-lightbulb"></i> Recommendations</h3>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Maintain a healthy diet and regular exercise</li>
+                                    <li><i class="fas fa-check"></i> Continue regular health check-ups</li>
+                                    <li><i class="fas fa-check"></i> Monitor blood glucose levels periodically</li>
+                                    <li><i class="fas fa-check"></i> Stay informed about diabetes prevention</li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% elif "Diabetic" in prediction and "Not" not in prediction %}
+                        <div class="result-status warning">
+                            <h2>High Risk Detected</h2>
+                            <p class="result-text">{{ prediction }}</p>
+                        </div>
+                        <div class="result-message">
+                            <p>Based on the provided health parameters, the AI model indicates a higher probability of diabetes.</p>
+                            <div class="result-recommendations warning-recommendations">
+                                <h3><i class="fas fa-exclamation-triangle"></i> Important Actions</h3>
+                                <ul>
+                                    <li><i class="fas fa-user-md"></i> <strong>Consult a healthcare professional immediately</strong></li>
+                                    <li><i class="fas fa-vial"></i> Get comprehensive blood tests done</li>
+                                    <li><i class="fas fa-apple-alt"></i> Review and modify your diet as per medical advice</li>
+                                    <li><i class="fas fa-running"></i> Incorporate regular physical activity</li>
+                                    <li><i class="fas fa-chart-line"></i> Monitor blood sugar levels regularly</li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="result-status error">
+                            <h2>Error Occurred</h2>
+                            <p class="result-text">{{ prediction }}</p>
+                        </div>
+                        <div class="result-message">
+                            <p>There was an issue processing your request. Please check your input values and try again.</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Important Notice -->
+                <div class="result-notice">
+                    <div class="notice-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="notice-content">
+                        <h4>Medical Disclaimer</h4>
+                        <p>This prediction is generated by an AI model and should NOT be considered as a medical diagnosis. 
+                        Always consult with qualified healthcare professionals for accurate diagnosis and treatment.</p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="result-actions">
+                    <a href="/" class="btn-primary">
+                        <i class="fas fa-redo"></i>
+                        New Prediction
+                    </a>
+                    <button onclick="window.print()" class="btn-secondary">
+                        <i class="fas fa-print"></i>
+                        Print Result
+                    </button>
+                </div>
+            </div>
+
+            <!-- Additional Info Cards -->
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Privacy Protected</h3>
+                    <p>Your data is not stored and remains completely private</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered</h3>
+                    <p>Result generated using advanced machine learning algorithms</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Instant Analysis</h3>
+                    <p>Get results in seconds with high accuracy</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>DiabetesAI</span>
+                </div>
+                <p>&copy; 2024 Diabetes Prediction System. For educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

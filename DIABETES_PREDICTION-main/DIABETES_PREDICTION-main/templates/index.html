@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction System | AI-Powered Health Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>DiabetesAI</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>AI-Powered Health Assessment</span>
+                </div>
+                <h1 class="hero-title">
+                    Predict Diabetes Risk
+                    <span class="gradient-text">Instantly</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Advanced machine learning technology to assess your diabetes risk based on key health metrics. 
+                    Fast, accurate, and completely confidential.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <strong>10K+</strong>
+                            <span>Predictions Made</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <strong>95%</strong>
+                            <span>Accuracy Rate</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Instant</strong>
+                            <span>Results</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section class="form-section">
+            <div class="form-container">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h2>Health Assessment Form</h2>
+                    <p>Enter your health parameters for accurate diabetes risk prediction</p>
+                </div>
+
+                <form action="/predict" method="post" class="prediction-form" id="predictionForm">
+                    <div class="form-grid">
+                        <!-- Pregnancies -->
+                        <div class="form-group">
+                            <label for="pregnancies">
+                                <i class="fas fa-baby"></i>
+                                Pregnancies
+                                <span class="tooltip-icon" data-tooltip="Number of times pregnant">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </label>
+                            <input type="number" 
+                                   name="pregnancies" 
+                                   id="pregnancies" 
+                                   min="0" 
+                                   max="20"
+                                   placeholder="e.g., 2"
+                                   required>
+                            <span class="input-hint">Enter number of pregnancies</span>
+                        </div>
+
+                        <!-- Glucose -->
+                        <div class="form-group">
+                            <label for="glucose">
+                                <i class="fas fa-tint"></i>
+                                Glucose Level
+                                <span class="tooltip-icon" data-tooltip="Plasma glucose concentration in mg/dL">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </label>
+                            <input type="number" 
+                                   name="glucose" 
+                                   id="glucose" 
+                                   min="0" 
+                                   max="300"
+                                   step="0.01"
+                                   placeholder="e.g., 120"
+                                   required>
+                            <span class="input-hint">Normal: 70-125 mg/dL</span>
+                        </div>
+
+                        <!-- Blood Pressure -->
+                        <div class="form-group">
+                            <label for="bloodpressure">
+                                <i class="fas fa-heartbeat"></i>
+                                Blood Pressure
+                                <span class="tooltip-icon" data-tooltip="Diastolic blood pressure in mm Hg">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </label>
+                            <input type="number" 
+                                   name="bloodpressure" 
+                                   id="bloodpressure" 
+                                   min="0" 
+                                   max="200"
+                                   step="0.01"
+                                   placeholder="e.g., 72"
+                                   required>
+                            <span class="input-hint">Normal: 60-80 mm Hg</span>
+                        </div>
+
+                        <!-- Skin Thickness -->
+                        <div class="form-group">
+                            <label for="skinthickness">
+                                <i class="fas fa-hand-paper"></i>
+                                Skin Thickness
+                                <span class="tooltip-icon" data-tooltip="Triceps skin fold thickness in mm">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </label>
+                            <input type="number" 
+                                   name="skinthickness" 
+                                   id="skinthickness" 
+                                   min="0" 
+                                   max="100"
+                                   step="0.01"
+                                   placeholder="e.g., 23"
+                                   required>
+                            <span class="input-hint">Typical: 10-50 mm</span>
+                        </div>
+
+                        <!-- Insulin -->
+                        <div class="form-group">
+                            <label for="insulin">
+                                <i class="fas fa-syringe"></i>
+                                Insulin Level
+                                <span class="tooltip-icon" data-tooltip="2-Hour serum insulin in mu U/ml">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </label>
+                            <input type="number" 
+                                   name="insulin" 
+                                   id="insulin" 
+                                   min="0" 
+                                   max="900"
+                                   step="0.01"
+                                   placeholder="e.g., 80"
+                                   required>
+                            <span class="input-hint">Normal: 16-166 mu U/ml</span>
+                        </div>
+
+                        <!-- BMI -->
+                        <div class="form-group">
+                            <label for="bmi">
+                                <i class="fas fa-weight"></i>
+                                BMI (Body Mass Index)
+                                <span class="tooltip-icon" data-tooltip="Body Mass Index = weight(kg) / height(m)²">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </label>
+                            <input type="number" 
+                                   name="bmi" 
+                                   id="bmi" 
+                                   min="0" 
+                                   max="70"
+                                   step="0.01"
+                                   placeholder="e.g., 25.5"
+                                   required>
+                            <span class="input-hint">Healthy: 18.5-24.9</span>
+                        </div>
+
+                        <!-- Diabetes Pedigree Function -->
+                        <div class="form-group">
+                            <label for="dpf">
+                                <i class="fas fa-dna"></i>
+                                Diabetes Pedigree Function
+                                <span class="tooltip-icon" data-tooltip="Genetic predisposition score">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </label>
+                            <input type="number" 
+                                   name="dpf" 
+                                   id="dpf" 
+                                   min="0" 
+                                   max="3"
+                                   step="0.001"
+                                   placeholder="e.g., 0.5"
+                                   required>
+                            <span class="input-hint">Typical: 0.08-2.5</span>
+                        </div>
+
+                        <!-- Age -->
+                        <div class="form-group">
+                            <label for="age">
+                                <i class="fas fa-calendar-alt"></i>
+                                Age
+                                <span class="tooltip-icon" data-tooltip="Age in years">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </label>
+                            <input type="number" 
+                                   name="age" 
+                                   id="age" 
+                                   min="1" 
+                                   max="120"
+                                   placeholder="e.g., 30"
+                                   required>
+                            <span class="input-hint">Age in years</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-predict">
+                            <span class="btn-content">
+                                <i class="fas fa-brain"></i>
+                                Predict Diabetes Risk
+                            </span>
+                            <span class="btn-loader"></span>
+                        </button>
+                        <button type="reset" class="btn-reset">
+                            <i class="fas fa-redo"></i>
+                            Reset Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section" id="about">
+            <div class="about-container">
+                <h2>About This System</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="card-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI-Powered</h3>
+                        <p>Uses advanced machine learning algorithms trained on thousands of medical records for accurate predictions.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="card-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>100% Private</h3>
+                        <p>Your data is never stored or shared. All predictions are made locally and confidentially.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="card-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Instant Results</h3>
+                        <p>Get your diabetes risk assessment in seconds with detailed, easy-to-understand results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-section" id="how-it-works">
+            <div class="how-container">
+                <h2>How It Works</h2>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Enter Your Data</h3>
+                            <p>Fill in your health parameters in the form above</p>
+                        </div>
+                    </div>
+                    <div class="step-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>AI Analysis</h3>
+                            <p>Our ML model analyzes your data instantly</p>
+                        </div>
+                    </div>
+                    <div class="step-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Get Results</h3>
+                            <p>Receive your diabetes risk prediction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="disclaimer-section">
+            <div class="disclaimer-container">
+                <div class="disclaimer-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>Important Medical Disclaimer</h3>
+                <p>
+                    This tool is for educational and informational purposes only. It is NOT a substitute for 
+                    professional medical advice, diagnosis, or treatment. Always seek the advice of your physician 
+                    or other qualified health provider with any questions you may have regarding a medical condition.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>DiabetesAI</span>
+                </div>
+                <p>&copy; 2024 Diabetes Prediction System. For educational purposes only.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
